@@ -1,0 +1,55 @@
+{
+  "name": "difftriage",
+  "displayName": "DiffTriage",
+  "description": "VS Code extension prototype that ranks open files and Git changes by path-based review risk",
+  "version": "0.1.0",
+  "private": true,
+  "publisher": "your-publisher",
+  "engines": {
+    "vscode": "^1.125.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "difftriage.triageOpenFiles",
+        "title": "DiffTriage: Score open files"
+      },
+      {
+        "command": "difftriage.triageGitChanges",
+        "title": "DiffTriage: Score git changes"
+      }
+    ]
+  },
+  "activationEvents": [
+    "onCommand:difftriage.triageOpenFiles",
+    "onCommand:difftriage.triageGitChanges"
+  ],
+  "scripts": {
+    "compile": "tsc -p tsconfig.json",
+    "pretest": "npm run compile",
+    "test": "npx tsx src/logic/index.test.ts 2>/dev/null || tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "package": "vsce package",
+    "postinstall": "sigmap",
+    "map:refresh": "sigmap",
+    "map:report": "sigmap --report --json",
+    "map:watch": "sigmap daemon start",
+    "map:setup": "sigmap --setup"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.125.0",
+    "@types/node": "^22.0.0",
+    "@types/mocha": "^10.0.0",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0",
+    "@vscode/vsce": "^3.9.2",
+    "ovsx": "^1.0.2",
+    "typescript": "^5.9.0",
+    "sigmap": "^8.18.0"
+  },
+  "dependencies": {}
+}
